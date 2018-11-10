@@ -8,8 +8,8 @@
             "matches": [
                 "<all_urls>"
             ],
-            "js": ["content.js"],
-            "run_at": "document_idle"
+            "js": ["content.js", "clarifai-latest.js"],
+            "run_at": "document_start"
         }
     ],
     "permissions": [
