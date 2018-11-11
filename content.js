@@ -5,29 +5,35 @@
     We can allow users to specif
 */
 
+const request = new XMLHttpRequest();
 
-function nodeInsertedCallback(event) {
-    console.log(event);
-    var imgs = document.getElementsByTagName("img");
-    for (var i = 0; i < imgs.length; i++) {
-        imgs[i].src = "https://source.unsplash.com/1600x900/?corgi,samoyed,dog";
+compare_image("https://media.wired.com/photos/5a55457ef41e4c2cd9ee6cb5/master/w_1164,c_limit/Doggo-TopArt-104685145.jpg");
 
-var observer = new MutationObserver(function(mutations){
-    for (var i=0; i < mutations.length; i++){
-        for (var j=0; j < mutations[i].addedNodes.length; j++){
-            checkNode(mutations[i].addedNodes[j]);
+function compare_image(image_file){
+
+    var jason = JSON.stringify({ "inputs": [
+        {
+          "data": {
+            "image": {
+              "url":image_file
+            }
+          }
+        }
+      ]
+    });
+    const http = new XMLHttpRequest();
+    const url="https://api.clarifai.com/v2/models/aaa03c23b3724a16a56b629203edc62c/versions/aa7f35c01e0642fda5cf400f543e7c40/outputs";
+    http.open("POST", url, true);
+
+    http.setRequestHeader("Authorization", "Key dd29486bdc2a466493a5dc9fdaa52f37");
+    http.setRequestHeader("Content-Type", "application/json");
+
+    http.onreadystatechange = function () {
+        if ( this.status == 200 && this.readyState==4 ){
+            console.log(http.responseText)
         }
     }
-});
+    console.log(image_file);
+    http.send(jason);
 
-observer.observe(document.documentElement, {
-    childList: true,
-    subtree: true
-});
-
-document.addEventListener('DOMNodeInserted', nodeInsertedCallback);
-checkNode = function(addedNode) {
-    if (addedNode.nodeType === 1 && addedNode.tagName === 'IMG'){
-        addedNode.src = "https://source.unsplash.com/featured/?corgi,samoyed,dog"
-    }
 }
