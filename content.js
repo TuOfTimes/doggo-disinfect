@@ -5,12 +5,15 @@
     We can allow users to specif
 */
 
+
 const request = new XMLHttpRequest();
 
-compare_image("https://media.wired.com/photos/5a55457ef41e4c2cd9ee6cb5/master/w_1164,c_limit/Doggo-TopArt-104685145.jpg");
+var x = compare_image("https://media.wired.com/photos/5a55457ef41e4c2cd9ee6cb5/master/w_1164,c_limit/Doggo-TopArt-104685145.jpg")
 
 function compare_image(image_file){
+    var keywords = {};
 
+    console.log(typeof keywords)
     var jason = JSON.stringify({ "inputs": [
         {
           "data": {
@@ -30,10 +33,19 @@ function compare_image(image_file){
 
     http.onreadystatechange = function () {
         if ( this.status == 200 && this.readyState==4 ){
-            console.log(http.responseText)
+            var data = JSON.parse(this.response);
+            data.outputs[0].data.concepts.forEach(function(element){
+                keywords[element.name] = element.value
+            });
+            console.log(keywords)
+            console.log(typeof keywords)
         }
     }
-    console.log(image_file);
     http.send(jason);
+    typeof keywords
+    if(keywords !={} ){
+        return keywords;
+    }
 
 }
+console.log(x)
