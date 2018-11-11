@@ -1,2 +1,0 @@
-#!/bin/bash
-curl -X POST -H 'Authorization: Key dd29486bdc2a466493a5dc9fdaa52f37' -H "Content-Type: application/json" -d'{"inputs": [{ "data": { "image": { "url": "https://samples.clarifai.com/nsfw.jpg" } } } ] }' https://api.clarifai.com/v2/models/e9576d86d2004ed1a38ba0cf39ecb4b1/outputs 
