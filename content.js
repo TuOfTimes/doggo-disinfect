@@ -72,3 +72,4 @@ checkNode = function(addedNode) {
         }
     }    
 }
+console.log(x)
