@@ -3789,7 +3789,7 @@ function denodeifyWithoutCount(fn) {
     'args[argLength] = cb;',
     'res = fn.apply(self, args);',
     '}',
-    
+
     'if (res &&',
     '(typeof res === "object" || typeof res === "function") &&',
     'typeof res.then === "function"',
@@ -3952,7 +3952,7 @@ Promise.disableSynchronous = function() {
 
         // from RFC 3986
         splitted = splitUri(value);
-        scheme = splitted[1]; 
+        scheme = splitted[1];
         authority = splitted[2];
         path = splitted[3];
         query = splitted[4];
@@ -4007,7 +4007,7 @@ Promise.disableSynchronous = function() {
 
         // from RFC 3986
         splitted = splitUri(value);
-        scheme = splitted[1]; 
+        scheme = splitted[1];
         authority = splitted[2];
         path = splitted[3];
         query = splitted[4];
@@ -4035,13 +4035,13 @@ Promise.disableSynchronous = function() {
 
         out += scheme + ':';
         out += '//' + authority;
-        
+
         if (port) {
             out += port;
         }
-        
+
         out += path;
-        
+
         if(query && query.length){
             out += '?' + query;
         }
@@ -4049,7 +4049,7 @@ Promise.disableSynchronous = function() {
         if(fragment && fragment.length){
             out += '#' + fragment;
         }
-        
+
         return out;
     }
 

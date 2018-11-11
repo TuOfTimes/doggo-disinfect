@@ -3,6 +3,10 @@
     "name": "Doggo Disinfect",
     "description": "Disinfect webpages by replacing suggestive images with photos of dogs",
     "version": "1.0.0",
+    "background":{
+      "scripts": ["background.js"],
+      "persistent": false
+    },
     "content_scripts": [
         {
             "matches": [
@@ -13,7 +17,7 @@
         }
     ],
     "permissions": [
-        "activeTab"
+        "activeTab",["clarifai"]
     ],
     "browser_action": {
         "default_popup": "popup.html",
