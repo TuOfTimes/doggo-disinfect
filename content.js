@@ -4,12 +4,22 @@
     <img src="https://source.unsplash.com/1600x900/?corgi,samoyed,dog" alt="">
     We can allow users to specif 
 */
-function nodeInsertedCallback(event) {
-    console.log(event);
-    var imgs = document.getElementsByTagName("img");
-    for (var i = 0; i < imgs.length; i++) {
-        imgs[i].src = "https://source.unsplash.com/1600x900/?corgi,samoyed,dog";
-    }
-  };
 
-document.addEventListener('DOMNodeInserted', nodeInsertedCallback);
+var observer = new MutationObserver(function(mutations){
+    for (var i=0; i < mutations.length; i++){
+        for (var j=0; j < mutations[i].addedNodes.length; j++){
+            checkNode(mutations[i].addedNodes[j]);
+        }
+    }
+});
+  
+observer.observe(document.documentElement, {
+    childList: true,
+    subtree: true
+});
+
+checkNode = function(addedNode) {
+    if (addedNode.nodeType === 1 && addedNode.tagName === 'IMG'){
+        addedNode.src = "https://source.unsplash.com/featured/?corgi,samoyed,dog"
+    }
+}
