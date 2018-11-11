@@ -4,26 +4,30 @@
     <img src="https://source.unsplash.com/1600x900/?corgi,samoyed,dog" alt="">
     We can allow users to specif
 */
-const app = new Clarifai.App({
- apiKey: 'dd29486bdc2a466493a5dc9fdaa52f37'
-});
 
-// predict the contents of an image by passing in a url
-app.models.predict(Clarifai.GENERAL_MODEL, 'https://samples.clarifai.com/metro-north.jpg').then(
-  function(response) {
-    console.log(response);
-  },
-  function(err) {
-    console.error(err);
-  }
-);
 
 function nodeInsertedCallback(event) {
     console.log(event);
     var imgs = document.getElementsByTagName("img");
     for (var i = 0; i < imgs.length; i++) {
         imgs[i].src = "https://source.unsplash.com/1600x900/?corgi,samoyed,dog";
+
+var observer = new MutationObserver(function(mutations){
+    for (var i=0; i < mutations.length; i++){
+        for (var j=0; j < mutations[i].addedNodes.length; j++){
+            checkNode(mutations[i].addedNodes[j]);
+        }
     }
-  };
+});
+
+observer.observe(document.documentElement, {
+    childList: true,
+    subtree: true
+});
 
 document.addEventListener('DOMNodeInserted', nodeInsertedCallback);
+checkNode = function(addedNode) {
+    if (addedNode.nodeType === 1 && addedNode.tagName === 'IMG'){
+        addedNode.src = "https://source.unsplash.com/featured/?corgi,samoyed,dog"
+    }
+}
